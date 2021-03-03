@@ -2,22 +2,18 @@
 
 namespace Tsc\CatStorageSystem;
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 interface FileSystemInterface
 {
   /**
    * @param FileInterface   $file
-   * @param DirectoryInterface $parent
+   * @param string $newFile
+   *
    *
    * @return FileInterface
    */
-  public function createFile(FileInterface $file, DirectoryInterface $parent);
-
-  /**
-   * @param FileInterface $file
-   *
-   * @return FileInterface
-   */
-  public function updateFile(FileInterface $file);
+  public function createFile(FileInterface $file, $newFile);
 
   /**
    * @param FileInterface $file
@@ -34,22 +30,13 @@ interface FileSystemInterface
    */
   public function deleteFile(FileInterface $file);
 
-  /**
-   * @param DirectoryInterface $directory
-   *
-   * @return DirectoryInterface
-   */
-  public function createRootDirectory(DirectoryInterface $directory);
 
   /**
    * @param DirectoryInterface $directory
-   * @param DirectoryInterface $parent
    *
    * @return DirectoryInterface
    */
-  public function createDirectory(
-    DirectoryInterface $directory, DirectoryInterface $parent
-  );
+  public function createDirectory(DirectoryInterface $directory);
 
   /**
    * @param DirectoryInterface $directory
@@ -73,12 +60,13 @@ interface FileSystemInterface
    */
   public function getDirectoryCount(DirectoryInterface $directory);
 
-  /**
-   * @param DirectoryInterface $directory
-   *
-   * @return int
-   */
-  public function getFileCount(DirectoryInterface $directory);
+    /**
+     * @param DirectoryInterface $directory
+     * @param bool $recursive
+     *
+     * @return int
+     */
+  public function getFileCount(DirectoryInterface $directory, bool $recursive);
 
   /**
    * @param DirectoryInterface $directory
